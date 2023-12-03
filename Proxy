@@ -1,0 +1,393 @@
+-- Growtopia Proxy By Leon
+-- Discord: Kenzy0123
+-- Made By Yonz
+
+
+LogToConsole("`9[Running Proxy Beta] `2Search to /proxy for command")
+
+----------------------------------------
+-- Define the Vars
+----------------------------------------
+proxylist = [[add_label_with_icon|big|`2Proxy Commands Gazette                |left|32|
+add_textbox|`0/proxy `9(Proxy List)|left|2480|
+add_textbox|`0/info `9(Information)|left|2480|
+add_textbox|`0/listcountry `9(WORK THE COUNTRY)|left|2480|
+add_textbox|`0/cn `9(Change Name VISUAL)|left|2480|
+add_textbox|`0/invis `9(Invisible VISUAL (BUG))|left|2480|
+add_textbox|`0/mentor `9(Title Master VISUAL)|left|2480|
+add_textbox|`0/doctor `9(Title Doctor VISUAL)|left|2480|
+add_textbox|`0/sd <count> `9(Drop Small Locks)|left|2480|
+add_textbox|`0/bgd <count> `9(Drop Big Locks)|left|2480|
+add_textbox|`0/hd <count> `9(Drop Huge Locks)|left|2480|
+add_textbox|`0/wd <count> `9(Drop World Locks)|left|2480|
+add_textbox|`0/dd <count> `9(Drop Diamond Locks)|left|2480|
+add_textbox|`0/bd <count> `9(Drop Blue Gem Locks)|left|2480|
+add_textbox|`0/daw `9(Drop All Locks (Not For, SL, BL, HL))|left|2480
+add_quick_exit|
+end_dialog|end|Cancel|Okay|
+]]
+
+info = [[add_label_with_icon|big|`2Information|left|32|
+add_textbox|`0Made by Yonz|left|2480|
+add_textbox|`cDiscord: Kenzy0123|left|2480|
+add_textbox|`#Donate World: BNCYA|left|2480|
+add_textbox|`4Di donate bang, buat makan Kerupuk|left|2480|
+add_quick_exit|
+end_dialog|end|Cancel|Okay|
+]]
+
+lcountry = [[add_label_with_icon|big|`2List Country Gazette                |left|32|
+add_textbox|`0/jp `9(JAPANS)|left|2480
+add_textbox|`0/tr `9(TURK)|left|2480
+add_textbox|`0/br `9(BRAZIL)|left|2480
+add_textbox|`0/my `9(MALAYSIA)|left|2480
+add_quick_exit|
+end_dialog|end|Cancel|Okay|
+]]
+
+info = [[add_label_with_icon|big|`2Information|left|32|
+add_textbox|`0Made by One One|left|2480|
+add_textbox|`chttps://discord.gg/sRH6TT5q|left|2480|
+add_textbox|`#Donate World: LORDSANSH|left|2480|
+add_textbox|`4Di donate bang, buat makan Kerupuk|left|2480|
+add_quick_exit|
+end_dialog|end|Cancel|Okay|
+]]
+
+systemcnsl = "`7[`2One One Proxy`7]`o "
+systemcmd = "`7[`2One One Proxy`7]`9 "
+
+function plog(str)
+    Log(systemcmd .. str)
+end
+
+local packet_log = false
+
+function ovlay(str)
+  var = {}
+  var[0] = "OnTextOverlay"
+  var[1] = str
+  SendVariant(var)
+end
+
+function mr()
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "id|master",
+            },GetLocal().netid)
+        uidchangedlog = GetLocal().userid
+end
+
+function dr()
+        SendVariant({
+            [0] = "OnNameChanged",
+            [1] = "Dr."..GetLocal().name,
+        },GetLocal().netid)
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "id|doctor",
+        },GetLocal().netid)
+end
+
+function tr()
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "tr|idks",
+            },GetLocal().netid)
+        uidchangedlog = GetLocal().userid
+end
+
+function jp()
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "jp|idk",
+            },GetLocal().netid)
+        uidchangedlog = GetLocal().userid
+end
+
+function br()
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "br|hhh",
+            },GetLocal().netid)
+        uidchangedlog = GetLocal().userid
+end
+
+function my()
+        SendVariant({
+            [0] = "OnCountryState",
+            [1] = "my|hhhs",
+            },GetLocal().netid)
+        uidchangedlog = GetLocal().userid
+end
+
+function changename(a)
+SendVariant({
+[0] = "OnNameChanged",
+[1] = a,
+},GetLocal().netid,100)
+end
+
+function invis()
+SendVariant({
+    [0] = "OnSetClothing",
+    [1] = {0,0,0},
+    [2] = {0,0,0},
+    [3] = {0,0,0},
+    [4] = 2,
+    [5] = {0, 0, 0},
+},GetLocal().netid,100)
+end
+
+function dl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 1796 then
+      SendPacket(2, "action|drop\n|itemID|1796")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|1796|\ncount|"..v.amount);
+    end
+  end
+end
+
+function bgl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 7188 then
+      SendPacket(2, "action|drop\n|itemID|7188")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|7188|\ncount|"..v.amount);
+    end
+  end
+end
+
+function wl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 242 then
+      SendPacket(2, "action|drop\n|itemID|242")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|242|\ncount|"..v.amount);
+    end
+  end
+end
+
+function sl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 202 then
+      SendPacket(2, "action|drop\n|itemID|202")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|202|\ncount|"..v.amount);
+    end
+  end
+end
+
+function bl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 204 then
+      SendPacket(2, "action|drop\n|itemID|204")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|204|\ncount|"..v.amount);
+    end
+  end
+end
+
+function hl()
+  for _, v in pairs(GetInventory()) do
+    if v.id == 206 then
+      SendPacket(2, "action|drop\n|itemID|206")
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|206|\ncount|"..v.amount);
+    end
+  end
+end
+
+----------------------------------------
+----------------------------------------
+
+
+
+----------------------------------------
+-- TextPacket Function
+----------------------------------------
+function TextPacket(type, packet)
+    if packet_log == true then
+        Log("type: "..type.." packet: "..packet)
+    end
+
+    function command(str)
+        if (packet:find("action|input\n|text|" .. str)) then
+            Log("`6" .. str)
+            return true
+        end
+    end
+
+    ----------------------
+    -- Proxy Commands
+    ----------------------
+    if command("/proxy") then
+        var = {}
+        var[0] = "OnDialogRequest"
+        var[1] = proxylist
+        SendVariant(var)
+    end
+    
+    if command("/listcountry") then
+        var = {}
+        var[0] = "OnDialogRequest"
+        var[1] = lcountry
+        SendVariant(var)
+    end
+
+    if command("/info") then
+        var = {}
+        var[0] = "OnDialogRequest"
+        var[1] = info
+        SendVariant(var)
+    end
+
+    if command("/packetlog") then
+        packet_log = not packet_log
+        if packet_log == true then
+            plog("Packet Log `2Enabled`9.")
+        else
+            plog("Packet Log `4Disabled`9.")
+        end
+    end
+  
+    if command("/wd") then
+      dropcount = packet:gsub("action|input\n|text|/wd", "")
+      SendPacket(2, "action|drop\n|itemID|242")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|242|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9World Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9World Lock") 
+    end
+  
+    if command("/dd") then
+      dropcount = packet:gsub("action|input\n|text|/dd", "")
+      SendPacket(2, "action|drop\n|itemID|1796")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|1796|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9Diamond Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9Diamond Lock") 
+    end
+    
+    if command("/bd") then
+      dropcount = packet:gsub("action|input\n|text|/bd", "")
+      SendPacket(2, "action|drop\n|itemID|7188")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|7188|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9Blue Gem Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9Blue Gem Lock") 
+    end
+  
+  if command("/sd") then
+      dropcount = packet:gsub("action|input\n|text|/sd", "")
+      SendPacket(2, "action|drop\n|itemID|202")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|202|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9Small Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9Small Lock") 
+    end
+    
+    if command("/bgd") then
+      dropcount = packet:gsub("action|input\n|text|/bgd", "")
+      SendPacket(2, "action|drop\n|itemID|204")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|204|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9Big Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9Big Lock") 
+    end
+    
+    if command("/hd") then
+      dropcount = packet:gsub("action|input\n|text|/hd", "")
+      SendPacket(2, "action|drop\n|itemID|206")        
+      SendPacket(2, "action|dialog_return\ndialog_name|drop_item\nitemID|206|\ncount|"..dropcount)
+      ovlay("`0Dropped : "..dropcount.. " `9Huge Lock") 
+      LogToConsole("`0Dropped : "..dropcount.. " `9Huge Lock") 
+    end
+    
+    if command("/daw") then
+      wl()
+      dl()
+      bgl()
+      ovlay("Dropped All Locks")
+      LogToConsole("Dropped All Locks")
+    end
+      
+    ----------------------
+    -- End Of Proxy Commands
+    ----------------------
+end
+----------------------------------------
+-- End of TextPacket Function
+----------------------------------------
+
+
+
+
+
+----------------------------------------
+-- VarianList Function
+----------------------------------------
+function vlist(vlist)
+  if vlist[0]:find("OnDialogRequest") and vlist[1]:find("end_dialog|drop_item") then
+    return true
+  end
+  return false
+end
+
+
+function VariantList(var)
+
+    ----------------------
+    -- OnConsoleMessage
+    ----------------------
+    if var[0]:find("OnConsoleMessage") then
+        var[1] = systemcnsl .. var[1]
+        SendVariant(var)
+        return true
+    end
+    ----------------------
+    -- End of OnConsoleMessage
+    ----------------------
+
+    return false
+end
+----------------------------------------
+-- End of TextPacket Function
+----------------------------------------
+
+----------------------------------------
+-- Add Hook to the function
+----------------------------------------
+AddHook("OnTextPacket", "Packet", TextPacket)
+AddHook("OnVariant", "Variant", VariantList)
+AddHook("OnVarlist", "Varliest", vlist)
+AddHook("OnTextPacket","Varmu",function(type,pkt)
+if pkt:find("/invis") then
+invis(pkt:match("/invis"))
+end
+end)
+AddHook("OnTextPacket","hookvar",function(type,pkt)
+if pkt:find("/cn (.+)") then
+changename(pkt:match("/cn (.+)"))
+end
+end)
+AddHook("OnTextPacket","Varku",function(type,pkt)
+if pkt:find("/mentor") then
+mr(pkt:match("/mentor"))
+end
+end)
+AddHook("OnTextPacket","Varlu",function(type,pkt)
+if pkt:find("/doctor") then
+dr(pkt:match("/doctor"))
+end
+end)
+AddHook("OnTextPacket","Vartr",function(type,pkt)
+if pkt:find("/tr") then
+tr(pkt:match("/tr"))
+end
+end)
+AddHook("OnTextPacket","Varjp",function(type,pkt)
+if pkt:find("/jp") then
+jp(pkt:match("/jp"))
+end
+end)
+AddHook("OnTextPacket","Varswe",function(type,pkt)
+if pkt:find("/br") then
+br(pkt:match("/br"))
+end
+end)
+AddHook("OnTextPacket","Varmy",function(type,pkt)
+if pkt:find("/my") then
+my(pkt:match("/my"))
+end
+end)
